@@ -94,6 +94,10 @@ class SampleApp(tk.Tk):
 
     def navigate(self, screen_name: str) -> None:
         """Raise the requested screen to the top of the stacking order."""
+        if screen_name not in self.frames:
+            print(f"Error: unknown screen '{screen_name}'. "
+                  f"Valid screens: {', '.join(self.frames)}")
+            return
         frame = self.frames[screen_name]
         frame.tkraise()
 
