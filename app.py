@@ -90,6 +90,7 @@ class SampleApp(tk.Tk):
 
         # Show the Home screen first.
         self.navigate("home")
+        self.navigate("invalid_screen")
 
     def navigate(self, screen_name: str) -> None:
         """Raise the requested screen to the top of the stacking order."""
