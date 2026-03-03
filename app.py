@@ -12,13 +12,14 @@ the others — no widgets are destroyed or recreated.
 
 import tkinter as tk
 from tkinter import ttk
+from typing import Callable, Dict
 
 
 # ---------------------------------------------------------------------------
 # Screen builders
 # ---------------------------------------------------------------------------
 
-def build_home(parent: tk.Frame, navigate) -> None:
+def build_home(parent: tk.Frame, navigate: Callable[[str], None]) -> None:
     """Populate the Home screen."""
     ttk.Label(parent, text="Home", font=("Helvetica", 24, "bold")).pack(pady=(40, 10))
     ttk.Label(parent, text="Welcome to the Sample App!").pack(pady=(0, 30))
@@ -27,7 +28,7 @@ def build_home(parent: tk.Frame, navigate) -> None:
     ttk.Button(parent, text="Go to Details", command=lambda: navigate("details")).pack(pady=5)
 
 
-def build_settings(parent: tk.Frame, navigate) -> None:
+def build_settings(parent: tk.Frame, navigate: Callable[[str], None]) -> None:
     """Populate the Settings screen with a dummy toggle."""
     ttk.Label(parent, text="Settings", font=("Helvetica", 24, "bold")).pack(pady=(40, 10))
 
@@ -40,7 +41,7 @@ def build_settings(parent: tk.Frame, navigate) -> None:
     ttk.Button(parent, text="Back to Home", command=lambda: navigate("home")).pack(pady=20)
 
 
-def build_details(parent: tk.Frame, navigate) -> None:
+def build_details(parent: tk.Frame, navigate: Callable[[str], None]) -> None:
     """Populate the Details screen with placeholder information."""
     ttk.Label(parent, text="Details", font=("Helvetica", 24, "bold")).pack(pady=(40, 10))
 
@@ -75,7 +76,7 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         # Create one frame per screen and place them in the same grid cell.
-        self.frames: dict[str, ttk.Frame] = {}
+        self.frames: Dict[str, ttk.Frame] = {}
         builders = {
             "home": build_home,
             "settings": build_settings,
